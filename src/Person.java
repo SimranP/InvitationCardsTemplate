@@ -1,42 +1,39 @@
 public class Person {
-    private String firstName;
-    private String lastName;
+    private Name name;
+    private Address address;
     private String gender;
     private String age;
-    private String city;
-    private String state;
-    private String country;
+    private String honirific;
 
     public Person(String[] details) {
-        this.firstName = details[0];
-        this.lastName = details[1];
+        this.name = new Name(details[0],details[1]);
         this.gender = details[2];
         this.age = details[3];
-        this.city = details[4];
-        this.state = details[5];
-        this.country = details[6];
+        this.address = new Address(details[4],details[5],details[6]);
+        this.honirific = honorific();
     }
 
-    public String firstLast(String seperator){
-        return honorific()+ " " +firstName+seperator+ lastName;
+    private String honorific() {
+        return isMale()? Gender.MALE.toString():Gender.FEMALE.toString();
     }
 
-    public String honorific(){
-        if(gender.equals("Male"))
-            return Gender.MALE.toString();
-        return Gender.FEMALE.toString();
+    private boolean isMale() {
+        return gender == "Male";
     }
 
-    public String lastFirst(String seperator) {
-        return honorific()+ seperator + lastName +seperator+firstName;
+    public String firstLast(){
+        return name.firstLast(honirific);
     }
 
-    public String getFirstLastwithCountry(String seperator){
-       return firstLast(" ") + seperator + country;
+    public String lastFirst(){
+        return name.lastFirst(honirific);
     }
 
-    public String getFirstLastwithCountry(String seperator1 ,String seperator2){
-        return firstLast(seperator1)+seperator2+country;
+    public String getFirstLastwithCountry() {
+        return firstLast()+", "+address.getCountry();
     }
 
+    public String getFirstLastwithCountry(String seperator) {
+        return honirific+" " +name.firstLastwithComma()+", "+address.getCountry();
+    }
 }
