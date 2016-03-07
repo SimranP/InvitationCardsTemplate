@@ -1,0 +1,64 @@
+Build a library that prints labels on the Invitation cards.
+
+Given a List of Records in a file.
+    - File format:
+        firstName,lastName,gender,age,city,state,country
+
+Output -
+    -  Mr. First Last
+    -  Ms. Last, First
+
+    Title for male - Mr.
+    Title for female - Ms.
+
+Usage :
+$ cat records
+    Omari,Beer,Male,20,Crooks ton,Vermont,Macedonia
+    Marcelo,Walter,Female,21,Katlynn view,North Carolina,Romania
+
+$ LabelPrinter firstLast records
+    Mr. Omari Beer
+    Ms. Marcelo Walter
+
+$ LabelPrinter lastFirst records
+    Mr. Beer, Omari
+    Ms. Walter, Marcelo
+
+
+------------------------------------------------------------------------------------
+
+TODO
+
+
+Version-1 [firstLast,lastFirst]
+
+    Person    ✓
+
+        -Name -firstName
+              -lastName
+
+        -Address -  city
+                 -  state
+                 - country
+
+        -Gender
+
+        -Age
+
+
+Behaviour Of Name --
+        Gives firstLast representation Of the name  ✓
+        Gives lastFirst representation Of the name  ✓
+
+Behaviour of Gender --
+
+        Gives Mr for Male      ✓
+        Gives Ms for Female    ✓
+
+Version-1 [Furnish label options for people from a specific country]
+
+        GuestList
+
+
+Behaviour of GuestList --
+        Gives list of guests from a specific country  ✓

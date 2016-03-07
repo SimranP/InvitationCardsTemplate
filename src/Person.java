@@ -8,7 +8,7 @@ public class Person {
     public Person(String[] details) {
         this.name = new Name(details[0],details[1]);
         this.gender = details[2];
-        this.age = details[3];
+        age = details[3];
         this.address = new Address(details[4],details[5],details[6]);
         this.honirific = honorific();
     }
@@ -18,7 +18,7 @@ public class Person {
     }
 
     private boolean isMale() {
-        return gender == "Male";
+        return gender.equals("Male");
     }
 
     public String firstLast(){
@@ -29,11 +29,13 @@ public class Person {
         return name.lastFirst(honirific);
     }
 
-    public String getFirstLastwithCountry() {
-        return firstLast()+", "+address.getCountry();
+    public String lastFirstWithCountry() {
+        return lastFirst()+", "+address.getCountry();
     }
 
-    public String getFirstLastwithCountry(String seperator) {
-        return honirific+" " +name.firstLastwithComma()+", "+address.getCountry();
+    public String firstLastWithCountry() { return firstLast()+", "+address.getCountry(); }
+
+    public String getCountry() {
+        return address.getCountry();
     }
 }

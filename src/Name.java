@@ -7,23 +7,13 @@ public class Name {
         this.lastName = lastName;
     }
 
-    public String firstLast(){
-        return firstName+" "+lastName;
+    public String firstLast(String honorific){
+        return honorific+" "+firstName+" "+lastName;
     }
 
-    public String firstLast(String title){
-        return title +" " +firstLast();
+    public String lastFirst(String honorific){
+        return  honorific+" "+lastName+", "+firstName;
     }
 
-    public String lastFirst(){
-        return lastName+" "+firstName;
-    }
 
-    public String lastFirst(String title){
-        return title +" " +lastFirst();
-    }
-
-    public String firstLastwithComma() {
-        return firstName+", "+lastName;
-    }
 }

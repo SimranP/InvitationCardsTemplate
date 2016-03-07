@@ -1,6 +1,6 @@
 public enum Gender {
-    FEMALE("Ms."),
-    MALE("Mr.");
+    FEMALE("Ms"),
+    MALE("Mr");
 
     private String value;
 

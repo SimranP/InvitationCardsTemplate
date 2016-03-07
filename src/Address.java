@@ -1,5 +1,5 @@
 public class Address {
-    private String country;
+    public final String country;
     private String city;
     private String state;
 
