@@ -23,14 +23,14 @@ public class Template {
         }
     }
 
-    public Template join(Template template){
-        Template t = this;
-        int size = template.templateFields.size();
-        t.addField(template.templateFields);
+    public Template join(Template otherTemplate){
+        Template template = this;
+        int size = otherTemplate.templateFields.size();
+        template.addField(otherTemplate.templateFields);
             for (int i = 0; i < size ; i++) {
-                t.template.put(template.templateFields.get(i),template.template.get(template.templateFields.get(i)));
+                template.template.put(otherTemplate.templateFields.get(i),otherTemplate.template.get(otherTemplate.templateFields.get(i)));
             }
-        return t;
+        return template;
     }
 
     @Override

@@ -1,41 +1,44 @@
 public class Person {
     private Name name;
     private Address address;
-    private String gender;
-    private String age;
-    private String honirific;
+    private Gender gender;
+    private Age age;
 
-    public Person(String[] details) {
-        this.name = new Name(details[0],details[1]);
-        this.gender = details[2];
-        age = details[3];
-        this.address = new Address(details[4],details[5],details[6]);
-        this.honirific = honorific();
-    }
-
-    private String honorific() {
-        return isMale()? Gender.MALE.toString():Gender.FEMALE.toString();
-    }
-
-    private boolean isMale() {
-        return gender.equals("Male");
+    public Person(Name name, Age age, Address address, Gender gender) {
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+        this.address = address;
     }
 
     public String firstLast(){
-        return name.firstLast(honirific);
+        return name.firstLast(gender.toString());
     }
 
     public String lastFirst(){
-        return name.lastFirst(honirific);
+        return name.lastFirst(gender.toString());
     }
 
-    public String lastFirstWithCountry() {
-        return lastFirst()+", "+address.getCountry();
+    public String lastFirstWithCountry() {return String.format("%s, %s",lastFirst(),address.getCountry()); }
+
+    public String firstLastWithCountry() {  return String.format("%s, %s",firstLast(),address.getCountry()); }
+
+    public String lastFirstWithCountryAndAge() { return String.format("%s, %s",lastFirstWithCountry(),age); }
+
+    public String firstLastWithCountryAndAge() { return String.format("%s, %s",firstLastWithCountry(),age); }
+
+    public boolean isAboveAge(int a) {
+        return age.isGreaterThan(a);
     }
 
-    public String firstLastWithCountry() { return firstLast()+", "+address.getCountry(); }
+    public boolean isFromCountry(String country) {
+        return address.getCountry().equals(country);
+    }
 
-    public String getCountry() {
-        return address.getCountry();
+    public String firstLastWithAge() { return String.format("%s, %s",firstLast(),age); }
+
+
+    public String lastFirstWithAge() {
+        return String.format("%s, %s",lastFirst(),age);
     }
 }

@@ -2,20 +2,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GuestList {
-    private HashMap<String,ArrayList<Person>> guests;
+    HashMap<String, Options> labelChoices = new HashMap<String, Options>();
+    private ArrayList<Person> guests;
 
     public GuestList() {
-        guests = new HashMap<String ,ArrayList<Person>>();
+        initializeChoices();
+        guests = new ArrayList<Person>();
     }
 
     public void add(Person person) {
-        ArrayList<Person>personList;
-       String country =  person.getCountry();
-        if(guests.get(country)==null) {
-            personList = new ArrayList<Person>();
-            guests.put(country, personList);
-        }
-        guests.get(country).add(person);
+        guests.add(person);
     }
 
     @Override
@@ -27,18 +23,57 @@ public class GuestList {
         return guests.size();
     }
 
-    private ArrayList<Person> listGuestsFrom(String country) {
-       return guests.get(country);
+    private void initializeChoices() {
+        labelChoices.put("firstLast", new FirstLast());
+        labelChoices.put("lastFirst", new LastFirst());
+        labelChoices.put("firstLastWithCountry", new PeopleAsFirstLastWithCountry());
+        labelChoices.put("lastFirstWithCountry", new PeopleAsLastFirstWithCountry());
+        labelChoices.put("peopleAsFirstLastAboveAgeInCountry", new PeopleAsFirstLastAboveAgeInCountry());
+        labelChoices.put("peopleAsLastFirstAboveAgeInCountry", new PeopleAsLastFirstAboveAgeInCountry());
+        labelChoices.put("peopleAsLastFirstWithAge",  new PeopleAsLastFirstAboveAge());
+        labelChoices.put("peopleAsFirstLastWithAge",  new PeopleAsFirstLastAboveAge());
     }
 
-    public String listGuestswithCountry(String country) {
-        String output = "";
-        ArrayList<Person> list = listGuestsFrom(country);
-        int size = list.size();
-        for (int i = 0; i < size-1; i++) {
-            output += list.get(i).firstLastWithCountry()+"\n";
+    public String printLabels(String option){
+        ArrayList<String> labels = new ArrayList<String>();
+        for (Person guest : guests) {
+            labels.add(labelChoices.get(option).createLabel(guest));
         }
-        output += list.get(size-1).firstLastWithCountry();
+        return join(labels,"\n");
+    }
+
+    public String printLabels(String option, String country){
+        GuestList guestsList = filterByCountry(country);
+        return guestsList.printLabels(option);
+    }
+
+    private GuestList filterByCountry(String country) {
+        GuestList guestList = new GuestList();
+        for (Person guest : guests)
+            if(guest.isFromCountry(country))  guestList.add(guest);
+        return  guestList;
+    }
+
+    private String join(ArrayList<String> labels, String joiner) {
+        String output = "";
+        int size = labels.size();
+        for (int counter = 0; counter < size-1; counter++) {
+            output = output.concat(labels.get(counter) + joiner);
+        }
+        output = output.concat(labels.get(size-1));
         return output;
+    }
+
+    public String printLabels(String option, String country, int age) {
+        GuestList filteredList = filterByCountry(country).filterByAge(age);
+        return filteredList.printLabels(option);
+
+    }
+
+    private GuestList filterByAge(int age) {
+        GuestList guestList = new GuestList();
+        for (Person guest : guests)
+            if(guest.isAboveAge(age))  guestList.add(guest);
+        return  guestList;
     }
 }

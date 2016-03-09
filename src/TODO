@@ -24,6 +24,41 @@ $ LabelPrinter lastFirst records
     Mr. Beer, Omari
     Ms. Walter, Marcelo
 
+$ LabelPrinter firstLastWithCountry records
+    Mr. Omari Beer, Macedonia
+    Ms. Marcelo Walter, Romania
+
+$ LabelPrinter lastFirstWithCountry records
+    Mr. Beer, Omari, Macedonia
+    Ms. Walter, Marcelo, Romania
+
+$ LabelPrinter firstLastWithCountry Macedonia records
+    Mr. Omari Beer, Macedonia
+
+$ LabelPrinter lastFirstWithCountry Romania records
+    Ms. Walter, Marcelo, Romania
+
+$ LabelPrinter peopleAsFirstLastAboveAgeInCountry 19 Macedonia records
+  Mr. Omari Beer, Macedonia, 20
+
+$ LabelPrinter peopleAsLastFirstAboveAgeInCountry 19 Romania records
+    Ms. Walter, Marcelo, Romania, 21
+
+$ LabelPrinter peopleAsFirstLastAboveAgeInCountry records
+    Mr. Omari Beer, Macedonia, 20
+    Ms. Marcelo Walter, Romania, 21
+
+$ LabelPrinter peopleAsLastFirstAboveAgeInCountry records
+    Mr. Beer, Omari, Macedonia, 20
+    Ms. Walter, Marcelo, Romania, 21
+
+$ LabelPrinter peopleAsFirstLastAboveAgeInCountry 19 records
+    Mr. Omari Beer, Macedonia, 20
+    Ms. Marcelo Walter, Romania, 21
+
+$ LabelPrinter peopleAsLastFirstAboveAgeInCountry 19 records
+    Mr. Beer, Omari, Macedonia, 20
+    Ms. Walter, Marcelo, Romania, 21
 
 ------------------------------------------------------------------------------------
 
@@ -37,9 +72,9 @@ Version-1 [firstLast,lastFirst]
         -Name -firstName
               -lastName
 
-        -Address -  city
-                 -  state
-                 - country
+        -Address -  City
+                 -  State
+                 - Country
 
         -Gender
 
@@ -55,10 +90,19 @@ Behaviour of Gender --
         Gives Mr for Male      ✓
         Gives Ms for Female    ✓
 
-Version-1 [Furnish label options for people from a specific country]
+Version-2 [Furnish label options for people from a specific country] ✓
 
         GuestList
 
 
 Behaviour of GuestList --
-        Gives list of guests from a specific country  ✓
+        Gives list of guests according to the given option  ✓
+
+Version-3 [Filter people above a certain age]   ✓
+
+
+
+
+
+
+
