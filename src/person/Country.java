@@ -1,3 +1,5 @@
+package person;
+
 public class Country {
     private String name;
 

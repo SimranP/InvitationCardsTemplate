@@ -1,3 +1,7 @@
+package runner;
+
+import person.*;
+
 import java.io.*;
 
 public class LabelPrinter {

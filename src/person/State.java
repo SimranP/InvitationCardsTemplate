@@ -1,3 +1,5 @@
+package person;
+
 public class State {
     private final String name;
 

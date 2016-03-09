@@ -1,5 +1,8 @@
 import org.junit.Before;
 import org.junit.Test;
+import person.*;
+import runner.GuestList;
+
 import static org.junit.Assert.*;
 
 public class GuestListTest {
@@ -7,7 +10,7 @@ public class GuestListTest {
 
     @Before
     public void setUp() throws Exception {
-      person =  new Person(new Name("Jaclyn","Bartoletti"),new Age(31),new Address(new City("Veda haven"), new State("North Carolina"), new Country("Macedonia")),Gender.MALE);
+      person =  new Person(new Name("Jaclyn","Bartoletti"),new Age(31),new Address(new City("Veda haven"), new State("North Carolina"), new Country("Macedonia")), Gender.MALE);
       person1 =  new Person(new Name("Melody","Dooley"),new Age(19),new Address(new City("West Shanna"),new State("Vermont"),new Country("Macedonia")),Gender.FEMALE);
       person2 =  new Person(new Name("Jane","Dooley"),new Age(19),new Address(new City("West Shanna"),new State("Vermont"),new Country("Bangladesh")),Gender.FEMALE);
     }

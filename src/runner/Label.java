@@ -1,3 +1,5 @@
+package runner;
+
 public class Label {
     private final String content;
 

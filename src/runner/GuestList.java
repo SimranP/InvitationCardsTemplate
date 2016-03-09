@@ -1,12 +1,14 @@
+package runner;
+
+import person.Person;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class GuestList {
-    HashMap<String, Options> labelChoices = new HashMap<String, Options>();
+    LabelChoices labelChoices = new LabelChoices();
     private ArrayList<Person> guests;
 
     public GuestList() {
-        initializeChoices();
         guests = new ArrayList<Person>();
     }
 
@@ -23,21 +25,12 @@ public class GuestList {
         return guests.size();
     }
 
-    private void initializeChoices() {
-        labelChoices.put("firstLast", new FirstLast());
-        labelChoices.put("lastFirst", new LastFirst());
-        labelChoices.put("firstLastWithCountry", new PeopleAsFirstLastWithCountry());
-        labelChoices.put("lastFirstWithCountry", new PeopleAsLastFirstWithCountry());
-        labelChoices.put("peopleAsFirstLastAboveAgeInCountry", new PeopleAsFirstLastAboveAgeInCountry());
-        labelChoices.put("peopleAsLastFirstAboveAgeInCountry", new PeopleAsLastFirstAboveAgeInCountry());
-        labelChoices.put("peopleAsLastFirstWithAge",  new PeopleAsLastFirstAboveAge());
-        labelChoices.put("peopleAsFirstLastWithAge",  new PeopleAsFirstLastAboveAge());
-    }
+
 
     public String printLabels(String option){
         ArrayList<String> labels = new ArrayList<String>();
         for (Person guest : guests) {
-            labels.add(labelChoices.get(option).createLabel(guest));
+            labels.add(labelChoices.applyChoiceOn(option,guest));
         }
         return join(labels,"\n");
     }
@@ -57,9 +50,8 @@ public class GuestList {
     private String join(ArrayList<String> labels, String joiner) {
         String output = "";
         int size = labels.size();
-        for (int counter = 0; counter < size-1; counter++) {
+        for (int counter = 0; counter < size-1; counter++)
             output = output.concat(labels.get(counter) + joiner);
-        }
         output = output.concat(labels.get(size-1));
         return output;
     }

@@ -1,5 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
+import person.*;
+
 import static org.junit.Assert.*;
 
 public class PersonTest
@@ -8,36 +10,17 @@ public class PersonTest
 
     @Before
     public void setUp() throws Exception {
-        jaclyn = new Person(new Name("Jaclyn","Bartoletti"),new Age(22),new Address(new City("Veda haven"), new State("North Carolina"), new Country("Macedonia")),Gender.MALE);
+        jaclyn = new Person(new Name("Jaclyn","Bartoletti"),new Age(22),new Address(new City("Veda haven"), new State("North Carolina"), new Country("Macedonia")), Gender.MALE);
     }
 
     @Test
     public void firstLast_represent_name_in_first_name_and_last_name() throws Exception {
-        assertEquals(jaclyn.firstLast(),"Mr Jaclyn Bartoletti");
+        assertEquals(jaclyn.firstLast().toString(),"Mr Jaclyn Bartoletti");
     }
 
     @Test
     public void lastFirst_represent_name_in_last_name_and_first_name() throws Exception {
-        assertEquals(jaclyn.lastFirst(),"Mr Bartoletti, Jaclyn");
-    }
-    @Test
-    public void getFirstLastwithCountry_gives_first_name_and_last_name_and_country() throws Exception {
-        assertEquals(jaclyn.firstLastWithCountry(),"Mr Jaclyn Bartoletti, Macedonia");
-    }
-
-    @Test
-    public void lastFirstwithCountry_gives_last_name_and_first_name_and_country() throws Exception {
-        assertEquals(jaclyn.lastFirstWithCountry(),"Mr Bartoletti, Jaclyn, Macedonia");
-    }
-
-    @Test
-    public void lastFirstWithCountryAndAge_gives_first_name_and_last_name_and_country_and_age() throws Exception {
-        assertEquals(jaclyn.lastFirstWithCountryAndAge(),"Mr Bartoletti, Jaclyn, Macedonia, 22");
-    }
-
-    @Test
-    public void lastFirstWithCountryAndAge_gives_last_name_and_first_name_and_country_and_age() throws Exception {
-        assertEquals(jaclyn.lastFirstWithCountryAndAge(),"Mr Bartoletti, Jaclyn, Macedonia, 22");
+        assertEquals(jaclyn.lastFirst().toString(),"Mr Bartoletti, Jaclyn");
     }
 
     @Test
@@ -51,13 +34,8 @@ public class PersonTest
     }
 
     @Test
-    public void firstLastWithAge_gives_first_name_and_last_name_and_age() throws Exception {
-        assertEquals(jaclyn.firstLastWithAge(),"Mr Jaclyn Bartoletti, 22");
-    }
-
-    @Test
-    public void lastFirstWithAge_gives_last_name_and_first_name_and_age() throws Exception {
-        assertEquals(jaclyn.lastFirstWithAge(),"Mr Bartoletti, Jaclyn, 22");
+    public void addAge_adds_age_to_the_given_label() throws Exception {
+        assertEquals(jaclyn.addAge(jaclyn.firstLast()).toString(),"Mr Jaclyn Bartoletti, 22");
     }
 
     @Test
@@ -68,5 +46,10 @@ public class PersonTest
     @Test
     public void isFromCountry_tells_if_person_is_not_from_given_country() throws Exception {
         assertFalse(jaclyn.isFromCountry("Bangladesh"));
+    }
+
+    @Test
+    public void addCountry_adds_country_to_the_given_label() throws Exception {
+        assertEquals(jaclyn.addCountry(jaclyn.firstLast()).toString(),"Mr Jaclyn Bartoletti, Macedonia");
     }
 }

@@ -1,0 +1,9 @@
+package option;
+import person.Person;
+
+public class PeopleAsLastFirstAboveAgeInCountry implements Option {
+    @Override
+    public String createLabel(Person person) {
+        return person.addAge(person.addCountry(person.lastFirst())).toString();
+    }
+}
