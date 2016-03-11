@@ -1,8 +1,7 @@
-import option.PeopleAsFirstLastWithCountry;
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import option.PeopleAsFirstLastWithCountry;
 import person.*;
-
-import static org.junit.Assert.*;
 
 public class PeopleAsFirstLastWithCountryTest {
     @Test

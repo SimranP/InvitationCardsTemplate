@@ -2,7 +2,7 @@ import option.PeopleAsFirstLastAboveAgeInCountry;
 import org.junit.Test;
 import person.*;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class PeopleAsFirstLastAboveAgeInCountryTest {
     @Test

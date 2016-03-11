@@ -1,9 +1,9 @@
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 import person.*;
 import runner.GuestList;
 
-import static org.junit.Assert.*;
 
 public class GuestListTest {
     Person person,person1,person2;

@@ -35,4 +35,8 @@ public class Person {
     public boolean isFromCountry(String country) {
         return address.getCountry().equals(country);
     }
+
+    public Label address() {
+        return new Label(address.toString());
+    }
 }

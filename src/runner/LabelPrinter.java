@@ -14,7 +14,7 @@ public class LabelPrinter {
             Person person = createPerson(line.split(","));
             guests.add(person);
         }
-        System.out.println(guests.printLabels(args[0]));
+            System.out.println(guests.printLabels("formalFinalFormat"));
     }
 
     private static Person createPerson(String[] details) {

@@ -1,7 +1,7 @@
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 import person.Name;
 
-import static org.junit.Assert.*;
 
 public class NameTest {
 

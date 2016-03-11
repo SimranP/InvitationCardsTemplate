@@ -22,6 +22,8 @@ public class LabelChoices {
         choices.put("peopleAsLastFirstAboveAgeInCountry", new PeopleAsLastFirstAboveAgeInCountry());
         choices.put("peopleAsLastFirstWithAge",  new PeopleAsLastFirstAboveAge());
         choices.put("peopleAsFirstLastWithAge",  new PeopleAsFirstLastAboveAge());
+        choices.put("formalFinalFormat", new PeopleAsFirstLastWithAddress());
+        choices.put("informalFinalFormat", new PeopleAsLastFirstWithAddress());
     }
 
     public String applyChoiceOn(String option, Person person) {

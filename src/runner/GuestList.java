@@ -25,14 +25,11 @@ public class GuestList {
         return guests.size();
     }
 
-
-
     public String printLabels(String option){
-        ArrayList<String> labels = new ArrayList<String>();
-        for (Person guest : guests) {
-            labels.add(labelChoices.applyChoiceOn(option,guest));
-        }
-        return join(labels,"\n");
+        String[] labels = new String[guests.size()];
+        for (int i = 0; i < labels.length ; i++)
+            labels[i] = labelChoices.applyChoiceOn(option,guests.get(i));
+        return String.join("\n",labels);
     }
 
     public String printLabels(String option, String country){
@@ -47,19 +44,15 @@ public class GuestList {
         return  guestList;
     }
 
-    private String join(ArrayList<String> labels, String joiner) {
-        String output = "";
-        int size = labels.size();
-        for (int counter = 0; counter < size-1; counter++)
-            output = output.concat(labels.get(counter) + joiner);
-        output = output.concat(labels.get(size-1));
-        return output;
-    }
-
     public String printLabels(String option, String country, int age) {
         GuestList filteredList = filterByCountry(country).filterByAge(age);
         return filteredList.printLabels(option);
 
+    }
+
+    public String printLabels(String option,int age){
+        GuestList filteredList = filterByAge(age);
+        return filteredList.printLabels(option);
     }
 
     private GuestList filterByAge(int age) {

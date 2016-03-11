@@ -1,7 +1,7 @@
 import org.junit.Test;
 import runner.Label;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class LabelTest {
     @Test
