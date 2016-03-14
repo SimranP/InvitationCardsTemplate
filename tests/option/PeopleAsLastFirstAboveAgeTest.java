@@ -1,3 +1,5 @@
+package option;
+
 import option.PeopleAsLastFirstAboveAge;
 import org.junit.Test;
 import person.*;

@@ -1,4 +1,5 @@
 package option;
+import person.FormalFormat;
 import person.Person;
 
 
@@ -8,6 +9,6 @@ public class FirstLast implements Option {
 
     @Override
     public String createLabel(Person person) {
-       return person.firstLast().toString();
+       return person.formatName(new FormalFormat()).toString();
     }
 }

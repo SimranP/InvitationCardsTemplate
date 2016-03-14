@@ -1,5 +1,7 @@
+package person;
+
 import org.junit.Test;
-import runner.Label;
+import person.Label;
 
 import static org.junit.Assert.assertEquals;
 

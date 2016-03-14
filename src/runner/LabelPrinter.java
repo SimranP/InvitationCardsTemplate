@@ -1,24 +1,23 @@
 package runner;
 
-import person.*;
-
-import java.io.*;
+import java.io.IOException;
+import java.nio.file.FileSystemNotFoundException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class LabelPrinter {
-    public static void main(String[] args) throws IOException {
-        File file = new File(args[1]);
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        GuestList guests = new GuestList();
-        String line;
-        while ((line = reader.readLine())!= null){
-            Person person = createPerson(line.split(","));
-            guests.add(person);
-        }
-            System.out.println(guests.printLabels("formalFinalFormat"));
+
+    public static void main(String[] args) throws IOException ,RuntimeException{
+        ArgumentParser arguments = new ArgumentParser(args);
+        GuestList guests = readGuestList(arguments.fileName());
+        guests = guests.applyFilters(arguments.filters());
+        System.out.println(guests.generateLabels(arguments.option()));
     }
 
-    private static Person createPerson(String[] details) {
-        Gender gender = details[2].equals("Male")?Gender.MALE:Gender.FEMALE;
-        return new Person(new Name(details[0],details[1]),new Age(Integer.parseInt(details[3])),new Address(new City(details[4]), new State(details[5]), new Country(details[6])),gender);
+    private static GuestList readGuestList(String fileName) throws IOException , FileSystemNotFoundException{
+        Path path = Paths.get(fileName);
+        byte[] bytes = Files.readAllBytes(path);
+        return GuestList.parse(new String(bytes));
     }
 }

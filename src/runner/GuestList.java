@@ -1,64 +1,66 @@
 package runner;
 
+import option.Option;
 import person.Person;
 
 import java.util.ArrayList;
+import java.util.Set;
+
+import validators.Validator;
 
 public class GuestList {
-    LabelChoices labelChoices = new LabelChoices();
     private ArrayList<Person> guests;
 
     public GuestList() {
         guests = new ArrayList<Person>();
     }
 
-    public void add(Person person) {
-        guests.add(person);
+    public static GuestList parse(String content){
+        GuestList guestList = new GuestList();
+        String[] peopleDetails = content.split("\n");
+        for (String personDetails : peopleDetails) {
+            guestList.add(Person.parse(personDetails));
+        }
+        return guestList;
     }
 
-    @Override
-    public String toString() {
-        return guests.toString();
+    public void add(Person person) {
+        guests.add(person);
     }
 
     public int size() {
         return guests.size();
     }
 
-    public String printLabels(String option){
+    public String generateLabels(Option option){
         String[] labels = new String[guests.size()];
         for (int i = 0; i < labels.length ; i++)
-            labels[i] = labelChoices.applyChoiceOn(option,guests.get(i));
+            labels[i] = option.createLabel(guests.get(i));
         return String.join("\n",labels);
     }
 
-    public String printLabels(String option, String country){
-        GuestList guestsList = filterByCountry(country);
-        return guestsList.printLabels(option);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        GuestList guestList = (GuestList) o;
+
+        return guests != null ? guests.equals(guestList.guests) : guestList.guests == null;
+
     }
 
-    private GuestList filterByCountry(String country) {
+    @Override
+    public int hashCode() {
+        return guests != null ? guests.hashCode() : 0;
+    }
+
+    public GuestList applyFilters(Set<Validator> filters) {
         GuestList guestList = new GuestList();
-        for (Person guest : guests)
-            if(guest.isFromCountry(country))  guestList.add(guest);
-        return  guestList;
-    }
-
-    public String printLabels(String option, String country, int age) {
-        GuestList filteredList = filterByCountry(country).filterByAge(age);
-        return filteredList.printLabels(option);
-
-    }
-
-    public String printLabels(String option,int age){
-        GuestList filteredList = filterByAge(age);
-        return filteredList.printLabels(option);
-    }
-
-    private GuestList filterByAge(int age) {
-        GuestList guestList = new GuestList();
-        for (Person guest : guests)
-            if(guest.isAboveAge(age))  guestList.add(guest);
-        return  guestList;
+        guestList.guests = guests;
+        for (Validator filter : filters) {
+            guestList.guests = filter.filter(guestList.guests);
+        }
+        return guestList;
     }
 }

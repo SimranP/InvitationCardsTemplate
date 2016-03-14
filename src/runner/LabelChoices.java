@@ -6,7 +6,7 @@ import person.Person;
 import java.util.HashMap;
 
 public class LabelChoices {
-    private final HashMap<String, Option> choices;
+    public final HashMap<String, Option> choices;
 
     public LabelChoices() {
         choices = new HashMap<String, Option>();
@@ -24,9 +24,5 @@ public class LabelChoices {
         choices.put("peopleAsFirstLastWithAge",  new PeopleAsFirstLastAboveAge());
         choices.put("formalFinalFormat", new PeopleAsFirstLastWithAddress());
         choices.put("informalFinalFormat", new PeopleAsLastFirstWithAddress());
-    }
-
-    public String applyChoiceOn(String option, Person person) {
-        return choices.get(option).createLabel(person);
     }
 }

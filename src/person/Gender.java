@@ -6,12 +6,11 @@ public enum Gender {
 
     private String value;
 
-    Gender(String s) {
-        this.value = s;
+    Gender(String honorific) {
+        this.value = honorific;
     }
 
-    @Override
-    public String toString() {
+    public String getHonorific() {
         return this.value;
     }
 }

@@ -1,3 +1,5 @@
+package person;
+
 import org.junit.Before;
 import org.junit.Test;
 import person.*;
@@ -16,12 +18,12 @@ public class PersonTest {
 
     @Test
     public void firstLast_represent_name_in_first_name_and_last_name() throws Exception {
-        assertEquals(jaclyn.firstLast().toString(),"Mr Jaclyn Bartoletti");
+        assertEquals(jaclyn.formatName(new FormalFormat()).toString(),"Mr Jaclyn Bartoletti");
     }
 
     @Test
     public void lastFirst_represent_name_in_last_name_and_first_name() throws Exception {
-        assertEquals(jaclyn.lastFirst().toString(),"Mr Bartoletti, Jaclyn");
+        assertEquals(jaclyn.formatName(new InformalFormat()).toString(),"Mr Bartoletti, Jaclyn");
     }
 
     @Test
@@ -36,7 +38,7 @@ public class PersonTest {
 
     @Test
     public void addAge_adds_age_to_the_given_label() throws Exception {
-        assertEquals(jaclyn.addAge(jaclyn.firstLast()).toString(),"Mr Jaclyn Bartoletti, 22");
+        assertEquals(jaclyn.addAge(jaclyn.formatName(new FormalFormat())).toString(),"Mr Jaclyn Bartoletti, 22");
     }
 
     @Test
@@ -51,6 +53,13 @@ public class PersonTest {
 
     @Test
     public void addCountry_adds_country_to_the_given_label() throws Exception {
-        assertEquals(jaclyn.addCountry(jaclyn.firstLast()).toString(),"Mr Jaclyn Bartoletti, Macedonia");
+        assertEquals(jaclyn.addCountry(jaclyn.formatName(new FormalFormat())).toString(),"Mr Jaclyn Bartoletti, Macedonia");
+    }
+
+    @Test
+    public void parse_parses_given_content_and_returns_a_person() throws Exception {
+        Person parsedPerson = Person.parse("Jaclyn,Bartoletti,Male,31,Veda haven,North Carolina,Macedonia");
+        Person person = new Person(new Name("Jaclyn","Bartoletti"),new Age(31),new Address(new City("Veda haven"), new State("North Carolina"), new Country("Macedonia")), Gender.MALE);
+        assertTrue(person.equals(parsedPerson));
     }
 }
